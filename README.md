@@ -29,7 +29,7 @@ The pipeline architecture can be seen in the below diagram. Technologies that wi
 ## Project Prerequisites <a name='prereq'></a>
 Although the project is designed to be easily reproducible, there are a few prerequisites that should be noted.
 1. Have a google cloud account and a project already set up.
-2. Have compeleted the GCP initial setup done in week 1 of the data engineering zoomcamp (created a GCS bucket, create a service account, download the credentials, download and setup google SDK and assign the environmental variable for GOOGLE_APPLICATION_CREDENTIALS.
+2. Have completed the GCP initial setup done in week 1 of the data engineering zoomcamp (created a GCS bucket, create a service account, download the credentials, download and setup google SDK and assign the environmental variable for GOOGLE_APPLICATION_CREDENTIALS.
 3. Have a Kaggle account and create an API token https://www.kaggle.com/docs/api
 4. Have a dbt account
 5. Have a dockerhub account and docker installed and set up on your computer
@@ -38,7 +38,7 @@ Although the project is designed to be easily reproducible, there are a few prer
 ## Steps to Reproduce <a name='repro'></a>
 
 ### Getting Started <a name='gs'></a>
-Before you start, you need to create a two blocks on prefect, one for docker, and one for GCS. The docker block name needs to be updated in the docker_deploy.py file and the gcs block name needs to be updated in the write_gcs function in the ingest_flow.py module. You will also need to update "deft-crawler-378422" in the ingest_flow.py file to your google cloud project name, and dataset.location = "europe-west6" to whatever location your project is set to.
+Before you start, you need to create two blocks on prefect, one for docker, and one for GCS. The docker block name needs to be updated in the docker_deploy.py file and the gcs block name needs to be updated in the write_gcs function in the ingest_flow.py module. You will also need to update "deft-crawler-378422" in the ingest_flow.py file to your google cloud project name, and dataset.location = "europe-west6" to whatever location your project is set to.
 
 ### Docker Data Ingestion <a name='ddi'></a>
 1. Save down your kaggle.json file in the same directory as the ingest_flow.py script
