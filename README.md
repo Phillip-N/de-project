@@ -12,4 +12,4 @@ The pipeline architecture can be seen in the below diagram. Technologies that wi
 * dbt
 * Looker Studios
 
-![Data Pipeline](https://user-images.githubusercontent.com/10274304/227746691-8faa834c-8eac-4da5-86c9-4071f15d75df.png)
+![Data Pipeline (1)](https://user-images.githubusercontent.com/10274304/227837495-320b2f40-f241-48fd-b82d-dab5e26d8461.png)
