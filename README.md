@@ -14,7 +14,7 @@
     * [Analytics](#pd-a)
 
 ## Purpose of the Project <a name='purpose'></a>
-The purpose of the project is build a data pipeline using the skills learned from the Data Engineering Zoomcamp (https://github.com/DataTalksClub/data-engineering-zoomcamp). 
+The purpose of the project is build a data pipeline using the skills learned from the <a href='https://github.com/DataTalksClub/data-engineering-zoomcamp'>Data Engineering Zoomcamp</a>. The problem the project is attempting to solve is a matter of how to process used cars data from a <a href='https://www.kaggle.com/datasets/rupeshraundal/marketcheck-automotive-data-us-canada'>kaggle dataset</a> for the purpose of further analysis. The architecture below demonstrates how the steps and infrastracture we will use to solve the problem.
 
 ## Data Pipeline Architecture <a name='architecture'></a>
 The pipeline architecture can be seen in the below diagram. Technologies that will be used include:
@@ -68,7 +68,7 @@ Thoughts:
 * Due to the low level of complexity of the dataset, using spark was not necessary, especially when we only have historical data and the transforms operations are mainly trivial.
 
 ### dbt Transformations <a name='pd-dt'></a>
-dbt was used to transform and prepare the data so that it can be later analyzed. Since the ingestion script took care of uploading the data to GCS and building bq tables, we simply need to conduct on transformations on the data that already exists in bq. Models were created to alter datatypes, combine the two datasets into a single table, and create a new table that measures average mileage utilization and average price metrics. Tests were also created to ensure uniqueness and non null across certain fields. Documentation is based off of marketchecks car data dictionary:  https://storage.googleapis.com/marketcheck-sample-feeds/cars_data_dictionary.xlsx.
+dbt was used to transform and prepare the data so that it can be later analyzed. Since the ingestion script took care of uploading the data to GCS and building bq tables, we simply need to conduct on transformations on the data that already exists in bq. Models were created to alter datatypes, combine the two datasets into a single table, and create a new table that measures average mileage utilization and average price metrics. Tests were also created to ensure uniqueness and non null across certain fields. Clustering was done on both combined table, and the metrics table - the reason we choose clustering here is because filtering would generally be done on multiple fields, and total dataset is on the small side in terms of size. Documentation can also be found in dbt and is based off of marketchecks car data dictionary:  https://storage.googleapis.com/marketcheck-sample-feeds/cars_data_dictionary.xlsx.
 
 Thoughts:
 * Data freshness would be a consideration in a production environment with data coming in daily.
