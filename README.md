@@ -82,7 +82,7 @@ Analytics was done using looker studios. Since we already have data in bigquery 
 
 A preview of the dashboard can also be seen below:
 
-![image](https://user-images.githubusercontent.com/10274304/228389687-29e2faa8-e63b-4158-8e59-66335f413326.png)
+![image](https://user-images.githubusercontent.com/10274304/228985757-9ae17a03-27a7-45b0-b6f3-6e03d3cc1e94.png)
 
 
 
