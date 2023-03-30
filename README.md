@@ -14,15 +14,15 @@
     * [Analytics](#pd-a)
 
 ## Purpose of the Project <a name='purpose'></a>
-The purpose of the project is build a data pipeline using the skills learned from the <a href='https://github.com/DataTalksClub/data-engineering-zoomcamp'>Data Engineering Zoomcamp</a>. The problem the project is attempting to solve is a matter of how to process used cars data from a <a href='https://www.kaggle.com/datasets/rupeshraundal/marketcheck-automotive-data-us-canada'>kaggle dataset</a> for the purpose of further analysis. The architecture below demonstrates how the steps and infrastracture we will use to solve the problem.
+The purpose of the project is build a data pipeline using the skills learned from the <a href='https://github.com/DataTalksClub/data-engineering-zoomcamp'>Data Engineering Zoomcamp</a>. The problem the project is attempting to solve is a matter of how to process used cars data from a <a href='https://www.kaggle.com/datasets/rupeshraundal/marketcheck-automotive-data-us-canada'>kaggle dataset</a> for the purpose of further analysis. The architecture below demonstrates the steps and infrastracture we will use to solve the problem.
 
 ## Data Pipeline Architecture <a name='architecture'></a>
 The pipeline architecture can be seen in the below diagram. Technologies that will be used include:
-* Prefect
-* Docker
-* Google Cloud Platform (GCS, Bigquery)
-* dbt
-* Looker Studios
+* <b>Prefect</b> - For Flow and Task Management
+* <b>Docker</b> - Containerization
+* <b>Google Cloud Platform (GCS, Bigquery)</b> - Data Storage
+* <b>dbt</b> - Data Transformation
+* <b>Looker</b> Studios - Data Analytics
 
 ![image](https://user-images.githubusercontent.com/10274304/228389951-c7e79540-7e68-4d74-a2a2-dda0399cb1d7.png)
 
