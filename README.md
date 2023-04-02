@@ -22,7 +22,7 @@ The pipeline architecture can be seen in the below diagram. Technologies that wi
 * <b>Docker</b> - Containerization
 * <b>Google Cloud Platform (GCS, Bigquery)</b> - Data Storage
 * <b>dbt</b> - Data Transformation
-* <b>Looker</b> Studios - Data Analytics
+* <b>Looker Studios</b> - Data Analytics
 
 ![image](https://user-images.githubusercontent.com/10274304/228389951-c7e79540-7e68-4d74-a2a2-dda0399cb1d7.png)
 
@@ -45,8 +45,8 @@ Before you start, you need to create two blocks on prefect, one for docker, and 
 2. Build your docker image using `docker image build --no-cache -t {dockerhub_account}/{repo_name}:cars-data-ingest .`
 3. Push your docker image using `docker image push {dockerhub_account}/{repo_name}:cars-data-ingest`
 4. Start your prefect orion server with `prefect orion start`
-5. Start your prefect agent with `prefect start -q default`
-6. Run docker deploy to create the deployment on prefect `python docker_deploy.py'
+5. Start your prefect agent with `prefect agent start -q default`
+6. Run docker_deploy to create the deployment on prefect `python docker_deploy.py`
 7. Run the deployment through prefect `prefect deployment run etl-parent-flow/docker-flow`
 
 ### dbt Transformations <a name='dt'></a>
@@ -68,7 +68,7 @@ Thoughts:
 * Due to the low level of complexity of the dataset, using spark was not necessary, especially when we only have historical data and the transforms operations are mainly trivial.
 
 ### dbt Transformations <a name='pd-dt'></a>
-dbt was used to transform and prepare the data so that it can be later analyzed. Since the ingestion script took care of uploading the data to GCS and building bq tables, we simply need to conduct transformations on the data that already exists in bq. Models were created to alter datatypes, combine the two datasets into a single table, and create a new table that measures average mileage utilization and average price metrics. Tests were also created to ensure uniqueness and non-null values across certain fields. Clustering was done on both combined table, and the metrics table - the reason we choose clustering here is because filtering would generally be done on multiple fields, and total dataset is on the small side in terms of size. Documentation can also be found in dbt and is based off of Marketcheck's car data dictionary:  https://storage.googleapis.com/marketcheck-sample-feeds/cars_data_dictionary.xlsx.
+dbt was used to transform and prepare the data so that it can be later analyzed. Since the ingestion script took care of uploading the data to GCS and building bq tables, we simply need to conduct transformations on the data that already exists in bq. Models were created to alter datatypes, combine the two datasets into a single table, and create a new table that measures average mileage utilization and average price metrics. Tests were also created to ensure uniqueness and non-null values across certain fields. <b>Clustering</b> was done on both combined table, and the metrics table - the reason we choose clustering here is because filtering would generally be done on multiple fields, and total dataset is on the small side in terms of size. Documentation can also be found in dbt and is based off of Marketcheck's car data dictionary:  https://storage.googleapis.com/marketcheck-sample-feeds/cars_data_dictionary.xlsx.
 
 Thoughts:
 * Data freshness would be a consideration in a production environment with data coming in daily.
