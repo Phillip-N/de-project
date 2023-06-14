@@ -41,13 +41,18 @@ Although the project is designed to be easily reproducible, there are a few prer
 Before you start, you need to create two blocks on prefect, one for docker, and one for GCS. The docker block name needs to be updated in the docker_deploy.py file and the gcs block name needs to be updated in the write_gcs function in the ingest_flow.py module. You will also need to update "deft-crawler-378422" in the ingest_flow.py file to your google cloud project name, and dataset.location = "europe-west6" to whatever location your project is set to.
 
 ### Docker Data Ingestion <a name='ddi'></a>
-1. Save down your kaggle.json file in the same directory as the ingest_flow.py script
-2. Build your docker image using `docker image build --no-cache -t {dockerhub_account}/{repo_name}:cars-data-ingest .`
-3. Push your docker image using `docker image push {dockerhub_account}/{repo_name}:cars-data-ingest`
-4. Start your prefect orion server with `prefect orion start`
-5. Start your prefect agent with `prefect agent start -q default`
-6. Run docker_deploy to create the deployment on prefect `python docker_deploy.py`
-7. Run the deployment through prefect `prefect deployment run etl-parent-flow/docker-flow`
+1. Pull the image from docker hub here: [https://hub.docker.com/repository/docker/phillipng/stock-etl-docker/general](https://hub.docker.com/repository/docker/phillipng/prefect/general). Make sure to include the `cars-data-ingest` tag.
+2. Configure your docker block to take in two environment variables, one for your Kaggle username and one for your Kaggle key:
+```
+{
+  "KAGGLE_USER": "YOUR_KAGGLE_USERNAME",
+  "KAGGLE_KEY": "YOUR_KAGGLE_KEY"
+}
+```
+3. Start your prefect orion server with `prefect orion start`
+4. Start your prefect agent with `prefect agent start -q default`
+5. Run docker_deploy to create the deployment on prefect `python docker_deploy.py`
+6. Run the deployment through prefect `prefect deployment run etl-parent-flow/docker-flow`
 
 ### dbt Transformations <a name='dt'></a>
 After running the deployment in the previous step, the required parquet files should be uploaded to your GCS bucket, and a dataset and two tables for used cars data should have been created in bigquery (canadian data and us data). You can now move on to deploying the dbt models.
