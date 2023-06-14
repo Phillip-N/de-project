@@ -5,13 +5,27 @@ from prefect_gcp.cloud_storage import GcsBucket
 from prefect_gcp import GcpCredentials
 from datetime import timedelta
 from google.cloud import bigquery
-import opendatasets as od
 import os
+from kaggle_build import build_kaggle_json
+import zipfile
 
 @task(retries=3, log_prints=True)
 def fetch_dataset() -> pd.DataFrame:
-    dataset_url = "https://www.kaggle.com/datasets/rupeshraundal/marketcheck-automotive-data-us-canada"
-    od.download(dataset_url)
+    # Builds kaggle file based on env variables passed on docker run
+    build_kaggle_json()
+    
+    import kaggle
+    kaggle.api.authenticate()
+    kaggle.api.dataset_download_files('rupeshraundal/marketcheck-automotive-data-us-canada', 'marketcheck-automotive-data-us-canada', quiet=False, unzip=False, force=True)
+
+    with zipfile.ZipFile("./marketcheck-automotive-data-us-canada/marketcheck-automotive-data-us-canada.zip", "r") as zip_ref:
+        for name in zip_ref.namelist():
+            try:
+                zip_ref.extract(name, "marketcheck-automotive-data-us-canada/")
+            except OSError as e:
+                print(e)
+                pass
+
     can_df = pd.read_csv('marketcheck-automotive-data-us-canada/ca-dealers-used.csv')
     us_df = pd.read_csv('marketcheck-automotive-data-us-canada/us-dealers-used.csv')
 
